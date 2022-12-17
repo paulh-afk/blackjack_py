@@ -11,3 +11,18 @@ print('''
    #    #  #           #   #####  #           #    #    # #
    #    #  ####        #   #   #  ####        #     ####  ####
 ''')
+
+print('The goal is to be the first player to get three in a row on a 3-by-3 grid')
+
+print('''
+ -- -- --
+|  |  |  |
+|  |  |  |
+ -- -- --
+|  |  |  |
+|  |  |  |
+ -- -- --
+|  |  |  |
+|  |  |  |
+ -- -- --
+''')
