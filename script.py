@@ -13,7 +13,7 @@ def name_to_symbol(name: str) -> str:
 
 
 def shuffle_deck(cards: list) -> list:
-    index_list = [*range(len(cards))]
+    index_list = list(range(len(cards)))
     shuffled_cards_deck = []
 
     while len(index_list):
@@ -25,10 +25,28 @@ def shuffle_deck(cards: list) -> list:
     return shuffled_cards_deck
 
 
+def init_players_hands() -> list:
+    strip_player_number_input = input(
+        'How many players are ready to play? (1-5) ').strip()
+
+    if strip_player_number_input.isdigit():
+        players_number = int(strip_player_number_input)
+    else:
+        print('Invalid type value, this value must be an integer!')
+        exit()
+
+    if players_number < 1 or players_number > 5:
+        print('Invalid value, the number of players must be between 1 and 5')
+        exit()
+
+    return [[] for _ in range(players_number)]
+
+
 # Read "hash.txt"
 try:
     with open('hash.txt', 'r') as file:
         check_sha1_hash = file.readline()
+
 except FileNotFoundError:
     print('The file "hash.txt" does not exist')
     exit()
@@ -44,12 +62,11 @@ try:
                 break
             hasher.update(data)
 
-        if check_sha1_hash == hasher.hexdigest():
-            print('"cards.yml" is authentic!')
-            del hasher
-        else:
+        if check_sha1_hash != hasher.hexdigest():
             print('"cards.yml" is not authentic!')
             exit()
+
+        del hasher, check_sha1_hash
 
 except FileNotFoundError:
     print('The file "cards.yml" does not exist')
@@ -66,4 +83,6 @@ with open('cards.yml', 'r') as file:
 card_symbols = ('♥', '♦', '♠', '♣')
 
 deck_cards = shuffle_deck(cards)
-dealer_cards = []
+
+players_hands = init_players_hands()
+dealer_hand = []
