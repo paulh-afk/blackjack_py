@@ -39,7 +39,8 @@ def init_players_hands() -> list:
         print('Invalid value, the number of players must be between 1 and 5')
         exit()
 
-    return [[] for _ in range(players_number)]
+    return [[{"amount": 500, "cards": []}] for _ in range(players_number)]
+
 
 
 # Read "hash.txt"
