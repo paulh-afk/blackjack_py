@@ -42,6 +42,9 @@ def init_players_hands() -> list:
     return [[{"amount": 500, "cards": []}] for _ in range(players_number)]
 
 
+def distribute_cards():
+    pass
+
 
 # Read "hash.txt"
 try:
