@@ -29,11 +29,11 @@ def init_players_hands() -> list:
     strip_player_number_input = input(
         'How many players are ready to play? (1-5) ').strip()
 
-    if strip_player_number_input.isdigit():
-        players_number = int(strip_player_number_input)
-    else:
+    if not strip_player_number_input.isdigit():
         print('Invalid type value, this value must be an integer!')
         exit()
+
+    players_number = int(strip_player_number_input)
 
     if players_number < 1 or players_number > 5:
         print('Invalid value, the number of players must be between 1 and 5')
