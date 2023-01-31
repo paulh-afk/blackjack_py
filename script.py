@@ -39,11 +39,22 @@ def init_players_hands() -> list:
         print('Invalid value, the number of players must be between 1 and 5')
         exit()
 
-    return [[{"amount": 500, "cards": []}] for _ in range(players_number)]
+    players = [[{"amount": 500, "cards": distribute_cards()}]
+               for _ in range(players_number)]
+
+    return players
 
 
-def distribute_cards():
-    pass
+def distribute_cards() -> list:
+    cards = []
+    for _ in range(2):
+        random_index = random.randrange(0, len(deck_cards))
+        random_card = deck_cards[random_index]
+        deck_cards.pop(random_index)
+
+        cards.append(random_card)
+
+    return cards
 
 
 def show_player_hand():
@@ -94,3 +105,5 @@ deck_cards = shuffle_deck(cards)
 
 players_hands = init_players_hands()
 dealer_hand = []
+
+print(players_hands)
