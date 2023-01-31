@@ -46,6 +46,10 @@ def distribute_cards():
     pass
 
 
+def show_player_hand():
+    pass
+
+
 # Read "hash.txt"
 try:
     with open('hash.txt', 'r') as file:
