@@ -23,7 +23,8 @@ def init_players_hands() -> list:
     players = []
 
     while count:
-        players.append(Player(deck_cards))
+        player_name = input('Enter your name: ')
+        players.append(Player(player_name, deck_cards))
         count -= 1
 
     return players
