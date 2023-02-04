@@ -1,5 +1,5 @@
 - symbol: heart
-  value: 1
+  value: A
 - symbol: heart
   value: 2
 - symbol: heart
@@ -25,7 +25,7 @@
 - symbol: heart
   value: K
 - symbol: diamond
-  value: 1
+  value: A
 - symbol: diamond
   value: 2
 - symbol: diamond
@@ -51,7 +51,7 @@
 - symbol: diamond
   value: K
 - symbol: spade
-  value: 1
+  value: A
 - symbol: spade
   value: 2
 - symbol: spade
@@ -77,7 +77,7 @@
 - symbol: spade
   value: K
 - symbol: club
-  value: 1
+  value: A
 - symbol: club
   value: 2
 - symbol: club
