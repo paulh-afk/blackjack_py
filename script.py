@@ -1,28 +1,8 @@
 import yaml
 import hashlib
-import random
 
-
-def name_to_symbol(name: str) -> str:
-    return {
-        'heart': card_symbols[0],
-        'diamond': card_symbols[1],
-        'spade': card_symbols[2],
-        'club': card_symbols[3]
-    }.get(name, 'Invalid symbol!')
-
-
-def shuffle_deck(cards: list) -> list:
-    index_list = list(range(len(cards)))
-    shuffled_cards_deck = []
-
-    while len(index_list):
-        random_index = random.randrange(0, len(index_list))
-
-        shuffled_cards_deck.append(cards[index_list[random_index]])
-        index_list.pop(random_index)
-
-    return shuffled_cards_deck
+import lib.cards as cards_lib
+from lib.player import Player
 
 
 def init_players_hands() -> list:
@@ -39,26 +19,14 @@ def init_players_hands() -> list:
         print('Invalid value, the number of players must be between 1 and 5')
         exit()
 
-    players = [[{"amount": 500, "cards": distribute_cards()}]
-               for _ in range(players_number)]
+    count = players_number
+    players = []
+
+    while count:
+        players.append(Player(deck_cards))
+        count -= 1
 
     return players
-
-
-def distribute_cards() -> list:
-    cards = []
-    for _ in range(2):
-        random_index = random.randrange(0, len(deck_cards))
-        random_card = deck_cards[random_index]
-        deck_cards.pop(random_index)
-
-        cards.append(random_card)
-
-    return cards
-
-
-def show_player_hand():
-    pass
 
 
 # Read "hash.txt"
@@ -99,11 +67,10 @@ with open('cards.yml', 'r') as file:
     del yaml_list
 
 
-card_symbols = ('♥', '♦', '♠', '♣')
-
-deck_cards = shuffle_deck(cards)
+deck_cards = cards_lib.shuffle_deck(cards)
 
 players_hands = init_players_hands()
 dealer_hand = []
 
 print(players_hands)
+print(len(deck_cards))
