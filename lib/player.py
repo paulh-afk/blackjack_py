@@ -7,10 +7,14 @@ from .cards import (
 )
 from terminaltables import AsciiTable
 
+BLACKJACK = 21
+
 
 class Player:
     name = ""
     token_amount = 500
+
+    # 1 card example: [{"cards": "heart", "value": 1}]
     cards = []
 
     def __init__(self, name: str, deck_cards: list) -> None:
@@ -44,6 +48,10 @@ class Player:
 
             table_data.append(row)
 
+        total_cards_value_str = str(self.total_cards_value())
+        total_row = ["Total", total_cards_value_str]
+        table_data.append(total_row)
+
         table = AsciiTable(table_data, self.name)
 
         return (
@@ -53,3 +61,33 @@ class Player:
             + " tokens and holds the cards:\n"
             + table.table
         )
+
+    def total_cards_value(self) -> int:
+        total = 0
+
+        cards_honor_cards_value = [
+            honor_card_name_to_value(card["value"])
+            if is_honor_card(card["value"])
+            else card["value"]
+            for card in self.cards
+        ]
+
+        # last card is ACE
+        for i in range(len(cards_honor_cards_value)):
+            if (type(cards_honor_cards_value[i]) is tuple) and (
+                i + 1 != len(cards_honor_cards_value)
+            ):
+                card = cards_honor_cards_value[i]
+                cards_honor_cards_value.pop(i)
+                cards_honor_cards_value.append(card)
+
+        for card_value in cards_honor_cards_value:
+            if type(card_value) is tuple:
+                if total <= (BLACKJACK - card_value[1]):
+                    total += card_value[1]
+                else:
+                    total += card_value[0]
+            else:
+                total += card_value
+
+        return total
