@@ -13,12 +13,12 @@ def name_to_symbol(name: str) -> str:
     }.get(name, "Invalid symbol!")
 
 
-def is_honor_card(card: str) -> bool:
-    return bool(honor_cards.count(card))
+def is_honor_card(card_value: str) -> bool:
+    return bool(honor_cards.count(card_value))
 
 
-def honor_card_name_to_value(card: str) -> tuple | int:
-    if card == "A":
+def honor_card_name_to_value(card_value: str) -> tuple | int:
+    if card_value == "A":
         return (1, 11)
     else:
         return 10
