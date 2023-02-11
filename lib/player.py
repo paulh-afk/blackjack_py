@@ -72,7 +72,7 @@ class Player:
             for card in self.cards
         ]
 
-        # last card is ACE
+        # The last card is an ace to determine its value
         for i in range(len(cards_honor_cards_value)):
             if (type(cards_honor_cards_value[i]) is tuple) and (
                 i + 1 != len(cards_honor_cards_value)

@@ -2,7 +2,7 @@ import yaml
 import hashlib
 
 import lib.cards as cards_lib
-from lib.player import Player
+from lib.Player import Player
 
 
 def init_players_hands() -> list:
