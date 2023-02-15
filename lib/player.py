@@ -14,7 +14,7 @@ class Player:
     name = ""
     token_amount = 500
 
-    # 1 card example: [{"cards": "heart", "value": 1}]
+    # 1 card example: [{"symbol": "heart", "value": 1}]
     cards = []
 
     def __init__(self, name: str, deck_cards: list) -> None:
@@ -22,6 +22,17 @@ class Player:
         self.cards = distribute_cards(deck_cards)
 
     def __repr__(self) -> str:
+        table = self.show_cards()
+
+        return (
+            self.name
+            + " has "
+            + str(self.token_amount)
+            + " tokens and holds the cards:\n"
+            + table
+        )
+
+    def show_cards(self, show_player_name: bool = False) -> str:
         table_data = [["Symbol", "Value"]]
 
         for card in self.cards:
@@ -52,15 +63,12 @@ class Player:
         total_row = ["Total", total_cards_value_str]
         table_data.append(total_row)
 
-        table = AsciiTable(table_data, self.name)
+        title = None
 
-        return (
-            self.name
-            + " has "
-            + str(self.token_amount)
-            + " tokens and holds the cards:\n"
-            + table.table
-        )
+        if show_player_name:
+            title = self.name
+
+        return AsciiTable(table_data, title).table
 
     def total_cards_value(self) -> int:
         total = 0
