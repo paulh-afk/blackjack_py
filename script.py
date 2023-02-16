@@ -3,6 +3,7 @@ import hashlib
 
 import lib.cards as cards_lib
 from lib.Player import Player
+from lib.Dealer import Dealer
 
 
 def init_players_hands() -> list:
@@ -75,3 +76,7 @@ players_hands = init_players_hands()
 dealer_hand = []
 
 print(players_hands)
+
+dealer = Dealer(deck_cards)
+
+print(dealer)
