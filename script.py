@@ -7,19 +7,21 @@ import lib.cards as cards_lib
 from lib.Player import Player
 from lib.Dealer import Dealer
 
+BLACKJACK = 21
+
 
 def init_players_hands() -> list:
     players_number = user_input_int("How many players are ready to play? (1-5) ")
 
     if players_number < 1 or players_number > 5:
-        print("Invalid value, the number of players must be between 1 and 5")
+        print("Invalid value, the number of players must be between 1 and 5!")
         exit()
 
     players = []
 
     for i in range(1, players_number + 1):
-        strip_player_name_input = user_input(f"Player {i} enter your name: ")
-        players.append(Player(strip_player_name_input, deck_cards))
+        player_name = user_input(f"Player {i} enter your name: ")
+        players.append(Player(player_name, deck_cards))
 
     return players
 
@@ -64,11 +66,18 @@ with open("cards.yml", "r") as file:
 
 deck_cards = cards_lib.shuffle_deck(cards)
 
-players_hands = init_players_hands()
-dealer_hand = []
-
-print(players_hands)
-
+players = init_players_hands()
 dealer = Dealer(deck_cards)
 
+for player in players:
+    print(player.show_cards(True))
+    dealer.request_player_choice(player, deck_cards)
+
 print(dealer)
+
+while dealer.total_cards_value() < 17:
+    dealer.draw_card(deck_cards)
+    print(dealer)
+
+if dealer.total_cards_value() > BLACKJACK:
+    print(dealer.name + f" exceeds BLACKJACK ({str(BLACKJACK)})")

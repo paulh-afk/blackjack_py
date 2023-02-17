@@ -39,15 +39,3 @@ def shuffle_deck(cards: list) -> list:
         index_list.pop(random_index)
 
     return shuffled_cards_deck
-
-
-def distribute_cards(deck_cards: list) -> list:
-    cards = []
-    for _ in range(2):
-        random_index = random.randrange(0, len(deck_cards))
-        random_card = deck_cards[random_index]
-        deck_cards.pop(random_index)
-
-        cards.append(random_card)
-
-    return cards

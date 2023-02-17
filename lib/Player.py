@@ -1,5 +1,4 @@
 from .cards import (
-    distribute_cards,
     name_to_symbol,
     is_honor_card,
     honor_card_name_to_fullname,
@@ -11,15 +10,13 @@ BLACKJACK = 21
 
 
 class Player:
-    name = ""
-    token_amount = 500
-
-    # 1 card example: [{"symbol": "heart", "value": 1}]
-    cards = []
-
     def __init__(self, name: str, deck_cards: list) -> None:
+        self.token_amount = 500
         self.name = name
-        self.cards = distribute_cards(deck_cards)
+        # 1 card example: [{"symbol": "heart", "value": 1}]
+        self.cards = []
+        for _ in range(2):
+            self.draw_card(deck_cards)
 
     def __repr__(self) -> str:
         table = self.show_cards()
@@ -31,6 +28,10 @@ class Player:
             + " tokens and holds the cards:\n"
             + table
         )
+
+    def draw_card(self, deck_cards: list) -> None:
+        self.cards.append(deck_cards[-1])
+        deck_cards.pop()
 
     def show_cards(self, show_player_name: bool = False) -> str:
         table_data = [["Symbol", "Value"]]
