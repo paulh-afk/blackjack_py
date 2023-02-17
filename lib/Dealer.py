@@ -6,4 +6,4 @@ class Dealer(Player):
         super().__init__("Dealer", deck_cards)
 
     def __repr__(self) -> str:
-        return self.show_cards()
+        return self.show_cards(True)

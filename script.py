@@ -1,33 +1,25 @@
 import yaml
 import hashlib
 
+from lib.utils import user_input, user_input_int
+
 import lib.cards as cards_lib
 from lib.Player import Player
 from lib.Dealer import Dealer
 
 
 def init_players_hands() -> list:
-    strip_player_number_input = input(
-        "How many players are ready to play? (1-5) "
-    ).strip()
-
-    if not strip_player_number_input.isdigit():
-        print("Invalid type value, this value must be an integer!")
-        exit()
-
-    players_number = int(strip_player_number_input)
+    players_number = user_input_int("How many players are ready to play? (1-5) ")
 
     if players_number < 1 or players_number > 5:
         print("Invalid value, the number of players must be between 1 and 5")
         exit()
 
-    count = players_number
     players = []
 
-    while count:
-        strip_player_name_input = input("Enter your name: ").strip()
+    for i in range(1, players_number + 1):
+        strip_player_name_input = user_input(f"Player {i} enter your name: ")
         players.append(Player(strip_player_name_input, deck_cards))
-        count -= 1
 
     return players
 
