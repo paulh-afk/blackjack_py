@@ -24,7 +24,9 @@ class Dealer(Player):
 
         question = [
             inquirer.List(
-                "bet", message="How much do you want to bet?", choices=bet_choices
+                "bet",
+                message=f"{player.name} how much do you want to bet?",
+                choices=bet_choices,
             ),
         ]
 
@@ -37,6 +39,9 @@ class Dealer(Player):
         return bet_answer["bet"]
 
     def request_player_choice(self, player: Player, deck_cards: list) -> None:
+        if player.total_cards_value() == BLACKJACK:
+            return
+
         question = [
             inquirer.Confirm("hit", message="Do you want to hit?", default=False),
         ]
