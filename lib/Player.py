@@ -11,7 +11,7 @@ BLACKJACK = 21
 
 class Player:
     def __init__(self, name: str, deck_cards: list) -> None:
-        self.token_amount = 500
+        self.token_amount = 70
         self.name = name
         # 1 card example: [{"symbol": "heart", "value": 1}]
         self.cards = []
@@ -19,9 +19,7 @@ class Player:
             self.draw_card(deck_cards)
 
     def __repr__(self) -> str:
-        table = self.show_cards()
-
-        return self.name + " has " + str(self.token_amount) + " tokens!"
+        return self.name + " has " + str(self.token_amount) + " tokens"
 
     def draw_card(self, deck_cards: list) -> None:
         self.cards.append(deck_cards[-1])
