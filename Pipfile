@@ -6,7 +6,6 @@ name = "pypi"
 [packages]
 pyyaml = "*"
 terminaltables = "*"
-pytest = "*"
 inquirer = "*"
 
 [dev-packages]
