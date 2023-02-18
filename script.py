@@ -74,13 +74,12 @@ players_token_bet = [0 for _ in players]
 for i in range(len(players)):
     player = players[i]
 
-    print(player.show_cards(True))
-    # dealer.request_player_choice(player, deck_cards)
-
     token_bet = dealer.request_player_tokens(player)
     if token_bet == 0:
         print(player.name + " does not have enough tokens to participate")
         continue
+
+    print(player.show_cards(True))
 
     players_token_bet[i] = token_bet
 
@@ -102,20 +101,21 @@ while dealer.total_cards_value() < 17:
 
 if dealer.total_cards_value() > BLACKJACK:
     print(dealer.name + f" exceeds BLACKJACK ({str(BLACKJACK)})")
-else:
-    for i in range(len(players)):
-        player = players[i]
 
-        player_cards_value = player.total_cards_value()
-        dealer_cards_value = dealer.total_cards_value()
 
-        if player_cards_value < dealer_cards_value or player_cards_value > BLACKJACK:
-            player.token_amount -= players_token_bet[i]
+for i in range(len(players)):
+    player = players[i]
 
-        elif (
-            player_cards_value < BLACKJACK and player_cards_value != dealer_cards_value
-        ) or (player_cards_value == BLACKJACK and dealer_cards_value != BLACKJACK):
-            player.token_amount += players_token_bet[i]
+    player_cards_value = player.total_cards_value()
+    dealer_cards_value = dealer.total_cards_value()
+
+    if player_cards_value < dealer_cards_value or player_cards_value > BLACKJACK:
+        player.token_amount -= players_token_bet[i]
+
+    elif (
+        player_cards_value < BLACKJACK and player_cards_value != dealer_cards_value
+    ) or (player_cards_value == BLACKJACK and dealer_cards_value != BLACKJACK):
+        player.token_amount += players_token_bet[i]
 
 
 for player in players:
