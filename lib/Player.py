@@ -21,13 +21,7 @@ class Player:
     def __repr__(self) -> str:
         table = self.show_cards()
 
-        return (
-            self.name
-            + " has "
-            + str(self.token_amount)
-            + " tokens and holds the cards:\n"
-            + table
-        )
+        return self.name + " has " + str(self.token_amount) + " tokens!"
 
     def draw_card(self, deck_cards: list) -> None:
         self.cards.append(deck_cards[-1])
