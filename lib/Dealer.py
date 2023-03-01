@@ -7,7 +7,11 @@ BLACKJACK = 21
 
 class Dealer(Player):
     def __init__(self, deck_cards: list) -> None:
-        super().__init__("Dealer", deck_cards)
+        self.token_amount = 70
+        self.name = "Dealer"
+        # 1 card example: [{"symbol": "heart", "value": 1}]
+        self.cards = []
+        self.draw_card(deck_cards)
 
     def __repr__(self) -> str:
         return self.show_cards(True)

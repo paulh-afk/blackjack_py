@@ -79,6 +79,8 @@ for i in range(len(players)):
         print(player.name + " does not have enough tokens to participate")
         continue
 
+    print(dealer)
+
     print(player.show_cards(True))
 
     players_token_bet[i] = token_bet
